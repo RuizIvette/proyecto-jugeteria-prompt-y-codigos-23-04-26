@@ -1,33 +1,23 @@
-¡Hola! Como creador de software, he diseñado este plan de trabajo integral.
-Vamos a construir la aplicación "Juguetería CRUD" utilizando una arquitectura
-limpia, siguiendo la metodología de Antigravity (orientada a agentes y flujos de
-trabajo eficientes) y con una estética moderna en tonos morados.
-
+¡Hola! Como creador de software, he diseñado este plan de trabajo integral. Vamos a construir la aplicación "Juguetería CRUD" utilizando una arquitectura limpia, siguiendo la metodología de Antigravity (orientada a agentes y flujos de trabajo eficientes) y con una estética moderna en tonos morados.
 1. Preparación del Entorno y Estructura
-
 Primero, creamos la estructura de carpetas en tu sistema:
-
+code
+Bash
 mkdir xflutterivette0684
 cd xflutterivette0684
 flutter create crudjugueteria
 cd crudjugueteria
-
 2. Configuración en Firebase Console
-
-1.  Ve a Firebase Console.
-2.  Crea un proyecto llamado crudjugueteria.
-3.  En el menú lateral, ve a Firestore Database y haz clic en Crear base de
-    datos.
-4.  Selecciona "Modo prueba" (para desarrollo) y elige una ubicación de
-    servidor.
-5.  Crea una colección llamada juguetes.
-6.  Registra tu app (Android/iOS) y descarga el archivo google-services.json
-    (para Android) y colócalo en android/app/.
-
+Ve a Firebase Console.
+Crea un proyecto llamado crudjugueteria.
+En el menú lateral, ve a Firestore Database y haz clic en Crear base de datos.
+Selecciona "Modo prueba" (para desarrollo) y elige una ubicación de servidor.
+Crea una colección llamada juguetes.
+Registra tu app (Android/iOS) y descarga el archivo google-services.json (para Android) y colócalo en android/app/.
 3. Librerías e Integración (pubspec.yaml)
-
 Para implementar Firebase y el diseño, editamos el archivo pubspec.yaml:
-
+code
+Yaml
 dependencies:
   flutter:
     sdk: flutter
@@ -35,30 +25,25 @@ dependencies:
   firebase_core: ^2.24.2
   cloud_firestore: ^4.14.0
   cupertino_icons: ^1.0.2
-
-Instalación: Ejecuta flutter pub get en la terminal. Inicialización: En
-lib/main.dart, asegúrate de inicializar Firebase:
-
+Instalación: Ejecuta flutter pub get en la terminal.
+Inicialización: En lib/main.dart, asegúrate de inicializar Firebase:
+code
+Dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
-
 4. Metodología Antigravity: Agentes y Flujo de Trabajo
-
-Para esta práctica guiada, dividiremos el desarrollo en Agentes Cognitivos. Cada
-estudiante debe asumir o entender estos roles:
-
-| Agente              | Rol           | Skill (Habilidad)                | Tarea                      |
-| :------------------ | :------------ | :------------------------------- | :------------------------- |
-| **Architect**       | Estructurador | Definición de Modelos            | Crear la clase `Juguete`.  |
-| **Firebase Master** | Backend       | Gestión de Firestore             | Crear el servicio de CRUD. |
-| **UI Designer**     | Estética      | Diseño de Widgets (Purple Theme) | Crear la interfaz visual.  |
-| **Flow Controller** | Lógica        | Manejo de estados y navegación   | Unir la lógica con la UI.  |
-
+Para esta práctica guiada, dividiremos el desarrollo en Agentes Cognitivos. Cada estudiante debe asumir o entender estos roles:
+Agente	Rol	Skill (Habilidad)	Tarea
+Architect	Estructurador	Definición de Modelos	Crear la clase Juguete.
+Firebase Master	Backend	Gestión de Firestore	Crear el servicio de CRUD.
+UI Designer	Estética	Diseño de Widgets (Purple Theme)	Crear la interfaz visual.
+Flow Controller	Lógica	Manejo de estados y navegación	Unir la lógica con la UI.
 5. Estructura de Archivos (Arquitectura Sugerida)
-
+code
+Text
 lib/
 ├── models/
 │   └── juguete_model.dart
@@ -68,13 +53,11 @@ lib/
 │   ├── home_screen.dart
 │   └── add_edit_screen.dart
 └── main.dart
-
 6. Implementación del Código Funcional
-
 A. El Modelo (Agente Architect)
-
 lib/models/juguete_model.dart
-
+code
+Dart
 class Juguete {
   String id;
   String nombre;
@@ -102,11 +85,10 @@ class Juguete {
     };
   }
 }
-
 B. El Servicio CRUD (Agente Firebase Master)
-
 lib/services/firebase_service.dart
-
+code
+Dart
 import 'cloud_firestore/cloud_firestore.dart';
 import '../models/juguete_model.dart';
 
@@ -128,11 +110,10 @@ class FirebaseService {
   // Borrar
   Future<void> deleteJuguete(String id) => collection.doc(id).delete();
 }
-
 C. La Interfaz de Usuario (Agente UI Designer & Flow Controller)
-
 lib/screens/home_screen.dart (Color Morado Atractivo)
-
+code
+Dart
 import 'package:flutter/material.dart';
 import '../services/firebase_service.dart';
 import '../models/juguete_model.dart';
@@ -190,11 +171,10 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
 D. Formulario Crear/Editar
-
 lib/screens/add_edit_screen.dart
-
+code
+Dart
 import 'package:flutter/material.dart';
 import '../models/juguete_model.dart';
 import '../services/firebase_service.dart';
@@ -265,15 +245,8 @@ class _AddEditScreenState extends State<AddEditScreen> {
     );
   }
 }
-
 7. Resumen de Flujo de Trabajo (Para Estudiantes)
-
-1.  Agent Architect: Define los datos (clase Juguete).
-2.  Agent Firebase: Conecta la nube (Firebase Console) y crea los métodos CRUD.
-3.  Agent Designer: Aplica el color deepPurple y crea las tarjetas.
-4.  Testing: Ejecuta flutter run y verifica que los datos se reflejen en la
-    consola de Firebase al instante.
-
-Este proyecto es una base sólida. El uso de Antigravity fomenta la separación de
-responsabilidades, lo que facilita el mantenimiento del software. ¡Éxito con tu
-práctica!
+Agent Architect: Define los datos (clase Juguete).
+Agent Firebase: Conecta la nube (Firebase Console) y crea los métodos CRUD.
+Agent Designer: Aplica el color deepPurple y crea las tarjetas.
+Testing: Ejecuta flutter run y verifica que los datos se reflejen en la consola de Firebase al instante.
