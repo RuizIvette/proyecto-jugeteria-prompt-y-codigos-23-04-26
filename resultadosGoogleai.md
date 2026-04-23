@@ -1,127 +1,142 @@
-¡Hola! Como creador de software, he diseñado este plan de trabajo integral. Vamos a construir la aplicación "Juguetería CRUD" utilizando una arquitectura limpia, siguiendo la metodología de Antigravity (orientada a agentes y flujos de trabajo eficientes) y con una estética moderna en tonos morados.
-1. Preparación del Entorno y Estructura
-Primero, creamos la estructura de carpetas en tu sistema:
-code
-Bash
-mkdir xflutterivette0684
-cd xflutterivette0684
-flutter create crudjugueteria
-cd crudjugueteria
-2. Configuración en Firebase Console
-Ve a Firebase Console.
-Crea un proyecto llamado crudjugueteria.
-En el menú lateral, ve a Firestore Database y haz clic en Crear base de datos.
-Selecciona "Modo prueba" (para desarrollo) y elige una ubicación de servidor.
-Crea una colección llamada juguetes.
-Registra tu app (Android/iOS) y descarga el archivo google-services.json (para Android) y colócalo en android/app/.
-3. Librerías e Integración (pubspec.yaml)
-Para implementar Firebase y el diseño, editamos el archivo pubspec.yaml:
-code
-Yaml
+¡Hola! Como desarrollador de software, he diseñado este plan de trabajo estructurado para que tus estudiantes no solo sigan instrucciones, sino que comprendan la arquitectura detrás de una app profesional. 
+
+Vamos a construir **"Juguetería Ivette"**, utilizando un flujo de trabajo moderno y una estética vibrante en tonos morados.
+
+---
+
+## 🛠️ Fase 1: Entorno y Configuración (Pasos 1-3)
+
+### 1. Estructura de Directorios
+Desde tu terminal o gestor de archivos, crea la jerarquía solicitada:
+* **Carpeta raíz:** `xflutterivette0684`
+* **Proyecto Flutter:** `crudjugueteria`
+
+### 2. Configuración en Firebase Console
+1.  Ve a [Firebase Console](https://console.firebase.google.com/).
+2.  Crea un nuevo proyecto llamado **"Jugueteria-CRUD"**.
+3.  En el menú lateral, ve a **Firestore Database** y haz clic en **Crear base de datos**.
+4.  Selecciona **"Iniciar en modo de prueba"** (para facilitar el desarrollo inicial) y elige una ubicación de servidor cercana.
+5.  Crea una colección llamada `juguetes`.
+
+---
+
+## 📦 Fase 2: Librerías y Dependencias (Pasos 4-5)
+
+Para integrar Firebase y manejar la UI de forma fluida, modificaremos el archivo `pubspec.yaml`.
+
+### ¿Cómo agregar las librerías?
+Ejecuta estos comandos en tu terminal dentro de la carpeta `crudjugueteria`:
+```bash
+flutter pub add firebase_core
+flutter pub add cloud_firestore
+```
+
+### Modificación del `pubspec.yaml`
+Tu archivo debería verse así (presta atención a la indentación):
+
+```yaml
 dependencies:
   flutter:
     sdk: flutter
-  # Librerías Core
-  firebase_core: ^2.24.2
-  cloud_firestore: ^4.14.0
-  cupertino_icons: ^1.0.2
-Instalación: Ejecuta flutter pub get en la terminal.
-Inicialización: En lib/main.dart, asegúrate de inicializar Firebase:
-code
-Dart
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-4. Metodología Antigravity: Agentes y Flujo de Trabajo
-Para esta práctica guiada, dividiremos el desarrollo en Agentes Cognitivos. Cada estudiante debe asumir o entender estos roles:
-Agente	Rol	Skill (Habilidad)	Tarea
-Architect	Estructurador	Definición de Modelos	Crear la clase Juguete.
-Firebase Master	Backend	Gestión de Firestore	Crear el servicio de CRUD.
-UI Designer	Estética	Diseño de Widgets (Purple Theme)	Crear la interfaz visual.
-Flow Controller	Lógica	Manejo de estados y navegación	Unir la lógica con la UI.
-5. Estructura de Archivos (Arquitectura Sugerida)
-code
-Text
-lib/
-├── models/
-│   └── juguete_model.dart
-├── services/
-│   └── firebase_service.dart
-├── screens/
-│   ├── home_screen.dart
-│   └── add_edit_screen.dart
-└── main.dart
-6. Implementación del Código Funcional
-A. El Modelo (Agente Architect)
-lib/models/juguete_model.dart
-code
-Dart
-class Juguete {
-  String id;
-  String nombre;
-  double precio;
-  int stock;
+  firebase_core: ^2.x.x  # Versión más reciente
+  cloud_firestore: ^4.x.x
+```
 
-  Juguete({required this.id, required this.nombre, required this.precio, required this.stock});
+---
 
-  // Convertir de Firestore a Objeto
-  factory Juguete.fromFirestore(Map<String, dynamic> data, String id) {
-    return Juguete(
-      id: id,
-      nombre: data['nombre'] ?? '',
-      precio: (data['precio'] ?? 0.0).toDouble(),
-      stock: data['stock'] ?? 0,
-    );
-  }
+## 🏗️ Fase 3: Metodología de Trabajo (Agentes y Roles) (Paso 8)
 
-  // Convertir de Objeto a JSON para Firestore
-  Map<String, dynamic> toFirestore() {
-    return {
-      'nombre': nombre,
-      'precio': precio,
-      'stock': stock,
+Para este proyecto, simularemos un entorno de **Desarrollo Ágil** basado en agentes:
+
+| Agente | Rol | Skill / Responsabilidad |
+| :--- | :--- | :--- |
+| **Arquitecto Cloud** | Configuración Firebase | Conexión del `google-services.json` y reglas de Firestore. |
+| **Backend Dev** | Lógica de Datos | Creación del servicio CRUD (`firestore_service.dart`). |
+| **Frontend Dev** | UI/UX Designer | Creación de interfaces en **Morado Intenso**. |
+| **QA Tester** | Depuración | Validación de que los campos (Nombre, Precio, Stock) se guarden correctamente. |
+
+**Flujo de Trabajo:**
+1. **Configuración inicial** $\rightarrow$ 2. **Servicios de Datos** $\rightarrow$ 3. **Vistas de UI** $\rightarrow$ 4. **Integración Final**.
+
+---
+
+## 📂 Estructura de Carpetas Sugerida
+```text
+crudjugueteria/
+├── lib/
+│   ├── services/
+│   │   └── firebase_service.dart  <-- (Lógica CRUD)
+│   ├── pages/
+│   │   ├── home_page.dart         <-- (Lista de juguetes)
+│   │   ├── add_juguete_page.dart  <-- (Crear/Editar)
+│   └── main.dart                  <-- (Punto de entrada)
+```
+
+---
+
+## 💻 Código Funcional (Paso 6)
+
+### 1. `services/firebase_service.dart` (El motor CRUD)
+Este archivo gestiona la comunicación con Firestore.
+
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+FirebaseFirestore db = FirebaseFirestore.instance;
+
+// LEER (Read)
+Future<List> getJuguetes() async {
+  List juguetes = [];
+  QuerySnapshot querySnapshot = await db.collection('juguetes').get();
+  for (var doc in querySnapshot.docs) {
+    final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    final juguete = {
+      "nombre": data['nombre'],
+      "precio": data['precio'],
+      "stock": data['stock'],
+      "uid": doc.id,
     };
+    juguetes.add(juguete);
   }
+  return juguetes;
 }
-B. El Servicio CRUD (Agente Firebase Master)
-lib/services/firebase_service.dart
-code
-Dart
-import 'cloud_firestore/cloud_firestore.dart';
-import '../models/juguete_model.dart';
 
-class FirebaseService {
-  final CollectionReference collection = FirebaseFirestore.instance.collection('juguetes');
-
-  // Leer (Stream para tiempo real)
-  Stream<List<Juguete>> getJuguetes() {
-    return collection.snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => Juguete.fromFirestore(doc.data() as Map<String, dynamic>, doc.id)).toList());
-  }
-
-  // Crear
-  Future<void> addJuguete(Juguete juguete) => collection.add(juguete.toFirestore());
-
-  // Actualizar
-  Future<void> updateJuguete(Juguete juguete) => collection.doc(juguete.id).update(juguete.toFirestore());
-
-  // Borrar
-  Future<void> deleteJuguete(String id) => collection.doc(id).delete();
+// GUARDAR (Create)
+Future<void> addJuguete(String nombre, double precio, int stock) async {
+  await db.collection('juguetes').add({
+    "nombre": nombre,
+    "precio": precio,
+    "stock": stock,
+  });
 }
-C. La Interfaz de Usuario (Agente UI Designer & Flow Controller)
-lib/screens/home_screen.dart (Color Morado Atractivo)
-code
-Dart
+
+// ACTUALIZAR (Update)
+Future<void> updateJuguete(String uid, String newNombre, double newPrecio, int newStock) async {
+  await db.collection('juguetes').doc(uid).set({
+    "nombre": newNombre,
+    "precio": newPrecio,
+    "stock": newStock,
+  });
+}
+
+// BORRAR (Delete)
+Future<void> deleteJuguete(String uid) async {
+  await db.collection('juguetes').doc(uid).delete();
+}
+```
+
+### 2. `pages/home_page.dart` (Interfaz en Morado)
+
+```dart
 import 'package:flutter/material.dart';
 import '../services/firebase_service.dart';
-import '../models/juguete_model.dart';
-import 'add_edit_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  final FirebaseService _service = FirebaseService();
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
 
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,124 +144,57 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Juguetería Ivette'),
         backgroundColor: Colors.deepPurple,
       ),
-      body: StreamBuilder<List<Juguete>>(
-        stream: _service.getJuguetes(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Center(child: CircularProgressIndicator(color: Colors.deepPurple));
-          
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              final juguete = snapshot.data![index];
-              return Card(
-                color: Colors.deepPurple.shade50,
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: ListTile(
-                  title: Text(juguete.nombre, style: const TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold)),
-                  subtitle: Text('Precio: \$${juguete.precio} - Stock: ${juguete.stock}'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.purple),
-                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AddEditScreen(juguete: juguete))),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.redAccent),
-                        onPressed: () => _service.deleteJuguete(juguete.id),
-                      ),
-                    ],
+      body: FutureBuilder(
+        future: getJuguetes(),
+        builder: ((context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data?.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(snapshot.data?[index]['nombre'], 
+                       style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                  subtitle: Text("Precio: \$${snapshot.data?[index]['precio']} - Stock: ${snapshot.data?[index]['stock']}"),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.purpleAccent),
+                    onPressed: () async {
+                      await deleteJuguete(snapshot.data?[index]['uid']);
+                      setState(() {}); // Refrescar
+                    },
                   ),
-                ),
-              );
-            },
-          );
-        },
+                );
+              },
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator(color: Colors.deepPurple));
+          }
+        }),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurple,
+        onPressed: () async {
+          // Aquí llamarías a la página de agregar, por simplicidad:
+          await addJuguete("Carrito", 25.0, 10);
+          setState(() {});
+        },
         child: const Icon(Icons.add),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddEditScreen())),
       ),
     );
   }
 }
-D. Formulario Crear/Editar
-lib/screens/add_edit_screen.dart
-code
-Dart
-import 'package:flutter/material.dart';
-import '../models/juguete_model.dart';
-import '../services/firebase_service.dart';
+```
 
-class AddEditScreen extends StatefulWidget {
-  final Juguete? juguete;
-  const AddEditScreen({this.juguete});
+---
 
-  @override
-  _AddEditScreenState createState() => _AddEditScreenState();
-}
+## 🚀 Práctica Guiada con Antigravity (Paso 7)
 
-class _AddEditScreenState extends State<AddEditScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _nombreCtrl = TextEditingController();
-  final _precioCtrl = TextEditingController();
-  final _stockCtrl = TextEditingController();
+**Antigravity** se refiere a simplificar el desarrollo eliminando la "fricción" o el "peso" de procesos complejos. Para una práctica con estudiantes:
 
-  @override
-  void initState() {
-    if (widget.juguete != null) {
-      _nombreCtrl.text = widget.juguete!.nombre;
-      _precioCtrl.text = widget.juguete!.precio.toString();
-      _stockCtrl.text = widget.juguete!.stock.toString();
-    }
-    super.initState();
-  }
+1.  **Fase de Despegue:** Los estudiantes no deben preocuparse por el backend complejo. Usamos Firestore porque es *NoSQL* y nos permite "lanzar" datos rápidamente.
+2.  **Zero Gravity UI:** Utilicen el widget `ThemeData` en `main.dart` para que toda la app herede el color morado automáticamente, evitando repetir código.
+3.  **Desafío Práctico:** * Pide a los estudiantes que añadan un cuarto campo llamado `categoria` (ej. Peluches, Acción). 
+    * Deben modificar el `firebase_service.dart` y la UI para reflejar este cambio.
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.juguete == null ? 'Nuevo Juguete' : 'Editar Juguete'),
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(controller: _nombreCtrl, decoration: const InputDecoration(labelText: 'Nombre', labelStyle: TextStyle(color: Colors.deepPurple))),
-              TextFormField(controller: _precioCtrl, decoration: const InputDecoration(labelText: 'Precio'), keyboardType: TextInputType.number),
-              TextFormField(controller: _stockCtrl, decoration: const InputDecoration(labelText: 'Stock'), keyboardType: TextInputType.number),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
-                onPressed: () {
-                  final j = Juguete(
-                    id: widget.juguete?.id ?? '',
-                    nombre: _nombreCtrl.text,
-                    precio: double.parse(_precioCtrl.text),
-                    stock: int.parse(_stockCtrl.text),
-                  );
-                  if (widget.juguete == null) {
-                    FirebaseService().addJuguete(j);
-                  } else {
-                    FirebaseService().updateJuguete(j);
-                  }
-                  Navigator.pop(context);
-                },
-                child: const Text('Guardar Juguete', style: TextStyle(color: Colors.white)),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-7. Resumen de Flujo de Trabajo (Para Estudiantes)
-Agent Architect: Define los datos (clase Juguete).
-Agent Firebase: Conecta la nube (Firebase Console) y crea los métodos CRUD.
-Agent Designer: Aplica el color deepPurple y crea las tarjetas.
-Testing: Ejecuta flutter run y verifica que los datos se reflejen en la consola de Firebase al instante.
+> **Nota para el docente:** Asegúrate de que los estudiantes descarguen el archivo `google-services.json` desde la consola de Firebase y lo coloquen en `android/app/`, de lo contrario, la app no despegará.
+
+¿Te gustaría que profundicemos en cómo validar que los campos de precio y stock solo acepten números?
